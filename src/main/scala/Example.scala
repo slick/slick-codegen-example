@@ -1,6 +1,6 @@
-object Tables extends demo.Tables{ // or just use object demo.Tables, which is hard-wired to the driver stated during generation
+object Tables extends{ // or just use object demo.Tables, which is hard-wired to the driver stated during generation
   val profile = scala.slick.driver.H2Driver  
-}
+} with demo.Tables
 import Tables._
 import Tables.profile.simple._
 

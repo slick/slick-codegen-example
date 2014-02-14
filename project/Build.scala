@@ -13,9 +13,9 @@ object myBuild extends Build {
     settings = Project.defaultSettings ++ Seq(
       scalaVersion := "2.10.3",
       libraryDependencies ++= List(
-        "com.typesafe.slick" %% "slick" % "2.0.0",
+        "com.typesafe.slick" %% "slick" % "2.0.1-RC1",
         "org.slf4j" % "slf4j-nop" % "1.6.4",
-        "com.h2database" % "h2" % "1.3.166"
+        "com.h2database" % "h2" % "1.3.170"
       ),
       slick <<= slickCodeGenTask, // register manual sbt command
       sourceGenerators in Compile <+= slickCodeGenTask // register automatic code generation on every compile, remove for only manual use
