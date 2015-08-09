@@ -7,16 +7,18 @@ import Tests._
  * database before compiling the projects code.
  */
 object myBuild extends Build {
+  val slickVersion = "3.0.1"
+
   lazy val mainProject = Project(
     id="main",
     base=file("."),
     settings = Project.defaultSettings ++ Seq(
-      scalaVersion := "2.10.3",
+      scalaVersion := "2.11.6",
       libraryDependencies ++= List(
-        "com.typesafe.slick" %% "slick" % "2.1.0",
-        "com.typesafe.slick" %% "slick-codegen" % "2.1.0-RC3",
-        "org.slf4j" % "slf4j-nop" % "1.6.4",
-        "com.h2database" % "h2" % "1.3.170"
+        "com.typesafe.slick" %% "slick" % slickVersion,
+        "com.typesafe.slick" %% "slick-codegen" % slickVersion,
+        "org.slf4j" % "slf4j-nop" % "1.7.12",
+        "com.h2database" % "h2" % "1.4.187"
       ),
       slick <<= slickCodeGenTask, // register manual sbt command
       sourceGenerators in Compile <+= slickCodeGenTask // register automatic code generation on every compile, remove for only manual use
@@ -29,9 +31,9 @@ object myBuild extends Build {
     val outputDir = (dir / "slick").getPath // place generated files in sbt's managed sources folder
     val url = "jdbc:h2:mem:test;INIT=runscript from 'src/main/sql/create.sql'" // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every run
     val jdbcDriver = "org.h2.Driver"
-    val slickDriver = "scala.slick.driver.H2Driver"
+    val slickDriver = "slick.driver.H2Driver"
     val pkg = "demo"
-    toError(r.run("scala.slick.codegen.SourceCodeGenerator", cp.files, Array(slickDriver, jdbcDriver, url, outputDir, pkg), s.log))
+    toError(r.run("slick.codegen.SourceCodeGenerator", cp.files, Array(slickDriver, jdbcDriver, url, outputDir, pkg), s.log))
     val fname = outputDir + "/demo/Tables.scala"
     Seq(file(fname))
   }
