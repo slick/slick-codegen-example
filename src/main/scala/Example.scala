@@ -2,7 +2,8 @@ object Tables extends{ // or just use object demo.Tables, which is hard-wired to
   val profile = scala.slick.driver.H2Driver  
 } with demo.Tables
 import Tables._
-import Tables.profile.simple._
+import Tables.profile.api._
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object Example extends App {
   // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every run
@@ -13,8 +14,8 @@ object Example extends App {
   val q = Companies.join(Computers).on(_.id === _.manufacturerId)
                    .map{ case (co,cp) => (co.name, cp.name) }
 
-  db.withTransaction { implicit session =>
-    println( q.run.groupBy{ case (co,cp) => co }
+  db.run(q.result).foreach { result =>
+    println(result.groupBy{ case (co,cp) => co }
                   .mapValues(_.map{ case (co,cp) => cp })
                   .mkString("\n")
     )
