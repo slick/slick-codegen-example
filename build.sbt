@@ -1,8 +1,10 @@
 name := "slick-codegen-example"
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.13.5"
 
-val slickVersion = "3.2.1"
+scalacOptions += "-deprecation"
+
+val slickVersion = "3.3.3"
 
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % slickVersion,
