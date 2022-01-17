@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % slickVersion,
   "com.typesafe.slick" %% "slick-codegen" % slickVersion,
   "org.slf4j" % "slf4j-nop" % "1.7.19",
-  "com.h2database" % "h2" % "1.4.200"
+  "com.h2database" % "h2" % "2.0.206"
 )
 
 sourceGenerators in Compile += slick.taskValue // Automatic code generation on build
