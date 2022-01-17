@@ -1,6 +1,6 @@
 name := "slick-codegen-example"
 
-scalaVersion := "2.13.5"
+scalaVersion := "2.13.8"
 
 scalacOptions += "-deprecation"
 
