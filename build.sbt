@@ -9,7 +9,7 @@ val slickVersion = "3.3.3"
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % slickVersion,
   "com.typesafe.slick" %% "slick-codegen" % slickVersion,
-  "org.slf4j" % "slf4j-nop" % "1.7.19",
+  "org.slf4j" % "slf4j-nop" % "1.7.33",
   "com.h2database" % "h2" % "1.4.196"
 )
 
