@@ -1,6 +1,11 @@
 name := "slick-codegen-example"
 
-ThisBuild / scalaVersion := "2.13.5"
+
+inThisBuild(List(
+  scalaVersion := "2.13.5",
+  githubWorkflowPublishTargetBranches := Seq()
+))
+
 
 scalacOptions += "-deprecation"
 
