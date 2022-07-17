@@ -22,15 +22,15 @@ libraryDependencies ++= Seq(
 
 lazy val slick = taskKey[Seq[File]]("Generate Tables.scala")
 slick := {
-  val dir = (Compile / sourceManaged) value
+  val dir = (Compile / sourceManaged).value
   val outputDir = dir / "slick"
   val url = "jdbc:h2:mem:test;INIT=runscript from 'src/main/sql/create.sql'" // connection info
   val jdbcDriver = "org.h2.Driver"
   val slickDriver = "slick.jdbc.H2Profile"
   val pkg = "demo"
 
-  val cp = (Compile / dependencyClasspath) value
-  val s = streams value
+  val cp = (Compile / dependencyClasspath).value
+  val s = streams.value
 
   runner.value.run("slick.codegen.SourceCodeGenerator",
     cp.files,
