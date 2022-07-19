@@ -3,7 +3,7 @@ queue_rules:
   - name: default
     conditions: []
 pull_request_rules:
-  - name: Automatically merge successful scala-steward PRs
+  - name: Automatically merge successful Scala Steward PRs
     conditions:
       - author=scala-steward
       - check-success=Build and Test (ubuntu-latest, 2.13.8, temurin@11)
