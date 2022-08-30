@@ -10,7 +10,7 @@ inThisBuild(List(
 
 scalacOptions += "-deprecation"
 
-val slickVersion = "3.3.3"
+val slickVersion = "3.4.0"
 
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % slickVersion,
