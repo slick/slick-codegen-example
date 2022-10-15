@@ -2,7 +2,7 @@ name := "slick-codegen-example"
 
 
 inThisBuild(List(
-  scalaVersion := "2.13.8",
+  scalaVersion := "2.13.10",
   githubWorkflowPublishTargetBranches := Seq(),
   githubWorkflowBuild +=WorkflowStep.Sbt(List("run"))
 ))
