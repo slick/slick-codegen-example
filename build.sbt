@@ -1,12 +1,20 @@
+import _root_.io.github.nafg.mergify.dsl._
+
+
 name := "slick-codegen-example"
 
 
 inThisBuild(List(
   scalaVersion := "2.13.10",
   githubWorkflowPublishTargetBranches := Seq(),
-  githubWorkflowBuild +=WorkflowStep.Sbt(List("run"))
+  githubWorkflowBuild += WorkflowStep.Sbt(List("run"))
 ))
 
+mergifyExtraConditions := Seq(
+  (Attr.Author :== "scala-steward") ||
+    (Attr.Author :== "slick-scala-steward[bot]") ||
+    (Attr.Author :== "renovate[bot]")
+)
 
 scalacOptions += "-deprecation"
 

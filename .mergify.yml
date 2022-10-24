@@ -5,7 +5,10 @@ queue_rules:
 pull_request_rules:
   - name: Automatically merge successful Scala Steward PRs
     conditions:
-      - author=scala-steward
+      - or:
+          - author=scala-steward
+          - author=slick-scala-steward[bot]
+          - author=renovate[bot]
       - check-success=Build and Test (ubuntu-latest, 2.13.10, temurin@11)
     actions:
         queue: {}
