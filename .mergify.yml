@@ -11,4 +11,5 @@ pull_request_rules:
           - author=renovate[bot]
       - check-success=Build and Test (ubuntu-latest, 2.13.10, temurin@11)
     actions:
-        queue: {}
+        queue:
+            name: default
