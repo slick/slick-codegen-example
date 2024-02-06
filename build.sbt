@@ -23,8 +23,8 @@ val slickVersion = "3.4.1"
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % slickVersion,
   "com.typesafe.slick" %% "slick-codegen" % slickVersion,
-  "org.slf4j" % "slf4j-nop" % "2.0.9",
-  "com.h2database" % "h2" % "2.2.222"
+  "org.slf4j" % "slf4j-nop" % "2.0.12",
+  "com.h2database" % "h2" % "2.2.224"
 )
 
 (Compile / sourceGenerators) += slick.taskValue // Automatic code generation on build
