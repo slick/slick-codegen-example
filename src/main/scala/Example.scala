@@ -1,6 +1,6 @@
 object Tables extends {
   // or just use object demo.Tables, which is hard-wired to the driver stated during generation
-  val profile = slick.driver.H2Driver
+  val profile = slick.jdbc.H2Profile
 } with demo.Tables
 
 
