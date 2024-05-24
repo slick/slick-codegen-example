@@ -1,7 +1,7 @@
-object Tables extends {
+object Tables extends demo.Tables {
   // or just use object demo.Tables, which is hard-wired to the driver stated during generation
-  val profile = slick.jdbc.H2Profile
-} with demo.Tables
+  override val profile = slick.jdbc.H2Profile
+}
 
 
 import scala.concurrent.Await
@@ -14,7 +14,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 
 object Example extends App {
-  // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every run
+  // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every
+  // run
   val url = "jdbc:h2:mem:test;INIT=runscript from 'src/main/sql/create.sql'"
   val db = Database.forURL(url, driver = "org.h2.Driver")
 
@@ -23,9 +24,6 @@ object Example extends App {
     .map { case (co, cp) => (co.name, cp.name) }
 
   Await.result(db.run(q.result).map { result =>
-    println(result.groupBy { case (co, cp) => co }
-      .mapValues(_.map { case (co, cp) => cp })
-      .mkString("\n")
-    )
+    println(result.groupMap(_._1)(_._2).mkString("\n"))
   }, 60 seconds)
 }
