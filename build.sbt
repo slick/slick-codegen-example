@@ -1,4 +1,4 @@
-import _root_.io.github.nafg.mergify.dsl._
+import _root_.io.github.nafg.mergify.dsl.*
 
 
 name := "slick-codegen-example"
@@ -7,7 +7,8 @@ name := "slick-codegen-example"
 inThisBuild(List(
   scalaVersion := "2.13.15",
   githubWorkflowPublishTargetBranches := Seq(),
-  githubWorkflowBuild += WorkflowStep.Sbt(List("run"))
+  githubWorkflowBuild += WorkflowStep.Sbt(List("run")),
+  githubWorkflowJavaVersions := Seq(JavaSpec.temurin("11"))
 ))
 
 mergifyExtraConditions := Seq(
