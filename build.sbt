@@ -5,6 +5,7 @@ name := "slick-codegen-example"
 inThisBuild(
   List(
     scalaVersion                        := "2.13.15",
+    scalacOptions += "-Xsource:3",
     githubWorkflowPublishTargetBranches := Seq(),
     githubWorkflowBuild += WorkflowStep.Sbt(List("run")),
     githubWorkflowJavaVersions          := Seq(JavaSpec.temurin("11"))
