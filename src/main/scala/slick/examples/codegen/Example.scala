@@ -1,15 +1,19 @@
+package slick.examples.codegen
+
+import slick.jdbc.H2Profile
+
 object Tables extends demo.Tables {
   // or just use object demo.Tables, which is hard-wired to the driver stated during generation
-  override val profile = slick.jdbc.H2Profile
+  override val profile: H2Profile.type = slick.jdbc.H2Profile
 }
 
 import scala.concurrent.Await
-import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.*
 import scala.language.postfixOps
 
-import Tables._
-import Tables.profile.api._
-import scala.concurrent.ExecutionContext.Implicits.global
+import slick.examples.codegen.Tables.*
+import slick.examples.codegen.Tables.profile.api.*
 
 object Example extends App {
   // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every
