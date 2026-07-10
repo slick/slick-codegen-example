@@ -8,7 +8,7 @@ inThisBuild(
     scalacOptions += "-Xsource:3",
     githubWorkflowPublishTargetBranches := Seq(),
     githubWorkflowBuild += WorkflowStep.Sbt(List("run")),
-    githubWorkflowJavaVersions          := Seq(JavaSpec.temurin("11"))
+    githubWorkflowJavaVersions          := Seq(JavaSpec.temurin("17"))
   )
 )
 
