@@ -7,33 +7,27 @@ object Tables extends demo.Tables {
   override val profile: H2Profile.type = slick.jdbc.H2Profile
 }
 
-import scala.concurrent.Await
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.*
-import scala.language.postfixOps
+import cats.effect.{IO, IOApp}
+import slick.cats.Database
+import slick.jdbc.DatabaseConfig
 
 import slick.examples.codegen.Tables.*
 import slick.examples.codegen.Tables.profile.api.*
 
-object Example {
+object Example extends IOApp.Simple {
   // connection info for a pre-populated throw-away, in-memory db for this demo, which is freshly initialized on every
   // run
   val url = "jdbc:h2:mem:test;INIT=runscript from 'src/main/sql/create.sql'"
 
-  def main(args: Array[String]): Unit = {
-    val db = Database.forURL(url, driver = "org.h2.Driver")
-
+  def run: IO[Unit] = Database.resource(DatabaseConfig.forURL(H2Profile, url, driver = "org.h2.Driver")).use { db =>
     // Using generated code. Our Build.sbt makes sure they are generated before compilation.
     val q = Companies
       .join(Computers)
       .on(_.id === _.manufacturerId)
       .map { case (co, cp) => (co.name, cp.name) }
 
-    Await.result(
-      db.run(q.result).map { result =>
-        println(result.groupMap(_._1)(_._2).mkString("\n"))
-      },
-      60 seconds
-    )
+    db.run(q.result).map { result =>
+      println(result.groupMap(_._1)(_._2).mkString("\n"))
+    }
   }
 }
