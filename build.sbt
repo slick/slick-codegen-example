@@ -19,8 +19,9 @@ mergifyExtraConditions := Seq(
 )
 
 scalacOptions += "-deprecation"
+run / fork := true
 
-val slickVersion = "3.6.1"
+val slickVersion = "4.0.0-RC2"
 
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick"         % slickVersion,
