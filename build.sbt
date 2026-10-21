@@ -35,6 +35,7 @@ libraryDependencies ++= Seq(
 
 (Compile / sourceGenerators) += slick.taskValue // Automatic code generation on build
 
+@transient
 lazy val slick = taskKey[Seq[File]]("Generate Tables.scala")
 slick := {
   val dir       = (Compile / sourceManaged).value
@@ -47,6 +48,7 @@ slick := {
 
   val cp = (Compile / dependencyClasspath).value
   val s  = streams.value
+  given FileConverter = fileConverter.value
 
   runner.value
     .run(
@@ -55,7 +57,8 @@ slick := {
       Array(slickDriver, jdbcDriver, url, outputDir.getPath, pkg),
       s.log
     )
-    .failed foreach (sys error _.getMessage)
+    .failed
+    .foreach(e => sys.error(e.getMessage))
 
   val file = outputDir / pkg / "Tables.scala"
 
